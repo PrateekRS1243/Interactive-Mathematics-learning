@@ -10,13 +10,13 @@
     <nav class="navbar">
         <div class="nav-container">
             <h1 class="logo">
-                <a href="index.html" style="color: inherit; text-decoration: none;">
+                <a href="/" style="color: inherit; text-decoration: none;">
                     <span class="math-icon">📐</span>
                     <span data-en="Interactive Maths" data-kn="ಸಂವಾದಾತ್ಮಕ ಗಣಿತ">Interactive Maths</span>
                 </a>
             </h1>
             <div class="nav-links">
-                <a href="index.html" class="nav-link" data-en="Home" data-kn="ಮುಖಪುಟ">Home</a>
+                <a href="/" class="nav-link" data-en="Home" data-kn="ಮುಖಪುಟ">Home</a>
                 <a href="shapes.html" class="nav-link" data-en="Shapes" data-kn="ಆಕೃತಿಗಳು">Shapes</a>
                 <a href="volumes.html" class="nav-link" data-en="Volumes" data-kn="ಆಯತನ">Volumes</a>
                 <a href="algebra.html" class="nav-link" data-en="Algebra" data-kn="ಬೀಜಗಣಿತ">Algebra</a>
@@ -39,6 +39,9 @@
         </div>
     </main>
 
+    <script>
+        try { sessionStorage.setItem('learningVisited', 'true'); } catch (e) {}
+    </script>
     <script src="nav.js"></script>
 </body>
 </html>

@@ -22,14 +22,18 @@ let currentShape = 'triangle';
 document.addEventListener('DOMContentLoaded', () => {
     const shapeItems = document.querySelectorAll('.shape-item');
     const explanationBox = document.getElementById('shapeExplanation');
-    const demoContainer = document.querySelector('.interactive-demo');
+    const shapeContainer = document.querySelector('.shape-container');
+    let demoContainer = document.querySelector('.interactive-demo');
 
     shapeItems.forEach(item => {
         item.addEventListener('click', () => {
             const shape = item.getAttribute('data-shape');
             currentShape = shape;
-            explanationBox.innerHTML = explanations[shape][currentLanguage];
-            explanationBox.classList.add('active');
+            // Explanation box removed: do not populate or show it
+            if (explanationBox) {
+                explanationBox.innerHTML = '';
+                explanationBox.classList.remove('active');
+            }
 
             shapeItems.forEach(i => i.classList.remove('selected'));
             item.classList.add('selected');
@@ -43,6 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    function ensureDemoContainer() {
+        if (!demoContainer && shapeContainer) {
+            demoContainer = document.createElement('div');
+            demoContainer.className = 'interactive-demo';
+            demoContainer.setAttribute('aria-live', 'polite');
+            shapeContainer.appendChild(demoContainer);
+        }
+        return demoContainer;
+    }
+
     function updateDemo(shape) {
         const demos = {
             triangle: createTriangleDemo,
@@ -51,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
             circle: createCircleDemo
         };
 
+        ensureDemoContainer();
+        if (!demoContainer) return;
         demoContainer.innerHTML = '';
         demos[shape]();
     }
@@ -113,12 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <input type="range" min="50" max="200" value="100" class="slider-vertical" id="param2Slider" orient="vertical">
                     <div class="slider-value" id="param2Value">100</div>
                 </div>
-            </div>
-            <div class="formula-box">
-                <div style="margin-bottom: 0.5rem;"><strong data-en="Area = ½ × base × height" data-kn="ವಿಸ್ತೀರ್ಣ = ½ × ಆಧಾರ × ಎತ್ತರ">Area = ½ × base × height</strong></div>
-                <div style="margin-bottom: 0.5rem;"><span data-en="Area:" data-kn="ವಿಸ್ತೀರ್ಣ:">Area:</span> <span id="shapeArea">5000</span></div>
-                <div><strong data-en="Perimeter = a + b + c" data-kn="ಪರಿಧಿ = a + b + c">Perimeter = a + b + c</strong></div>
-                <div><span data-en="Perimeter:" data-kn="ಪರಿಧಿ:">Perimeter:</span> <span id="shapePerimeter">300</span></div>
+                <div class="formula-box">
+                    <div style="margin-bottom: 0.5rem;"><strong data-en="Area = ½ × base × height" data-kn="ವಿಸ್ತೀರ್ಣ = ½ × ಆಧಾರ × ಎತ್ತರ">Area = ½ × base × height</strong></div>
+                    <div style="margin-bottom: 0.5rem;"><span data-en="Area:" data-kn="ವಿಸ್ತೀರ್ಣ:">Area:</span> <span id="shapeArea">5000</span></div>
+                    <div><strong data-en="Perimeter = a + b + c" data-kn="ಪರಿಧಿ = a + b + c">Perimeter = a + b + c</strong></div>
+                    <div><span data-en="Perimeter:" data-kn="ಪರಿಧಿ:">Perimeter:</span> <span id="shapePerimeter">300</span></div>
+                </div>
             </div>
         `;
         updateLanguage();
@@ -175,12 +191,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="canvas-container">
                     <canvas id="shapeCanvas" width="300" height="300"></canvas>
                 </div>
-            </div>
-            <div class="formula-box">
-                <div style="margin-bottom: 0.5rem;"><strong data-en="Area = side²" data-kn="ವಿಸ್ತೀರ್ಣ = ಬಾಹು²">Area = side²</strong></div>
-                <div style="margin-bottom: 0.5rem;"><span data-en="Area:" data-kn="ವಿಸ್ತೀರ್ಣ:">Area:</span> <span id="shapeArea">14400</span></div>
-                <div><strong data-en="Perimeter = 4 × side" data-kn="ಪರಿಧಿ = 4 × ಬಾಹು">Perimeter = 4 × side</strong></div>
-                <div><span data-en="Perimeter:" data-kn="ಪರಿಧಿ:">Perimeter:</span> <span id="shapePerimeter">480</span></div>
+                <div class="formula-box">
+                    <div style="margin-bottom: 0.5rem;"><strong data-en="Area = side²" data-kn="ವಿಸ್ತೀರ್ಣ = ಬಾಹು²">Area = side²</strong></div>
+                    <div style="margin-bottom: 0.5rem;"><span data-en="Area:" data-kn="ವಿಸ್ತೀರ್ಣ:">Area:</span> <span id="shapeArea">14400</span></div>
+                    <div><strong data-en="Perimeter = 4 × side" data-kn="ಪರಿಧಿ = 4 × ಬಾಹು">Perimeter = 4 × side</strong></div>
+                    <div><span data-en="Perimeter:" data-kn="ಪರಿಧಿ:">Perimeter:</span> <span id="shapePerimeter">480</span></div>
+                </div>
             </div>
         `;
         updateLanguage();
@@ -242,12 +258,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <input type="range" min="60" max="150" value="100" class="slider-vertical" id="param2Slider" orient="vertical">
                     <div class="slider-value" id="param2Value">100</div>
                 </div>
-            </div>
-            <div class="formula-box">
-                <div style="margin-bottom: 0.5rem;"><strong data-en="Area = length × width" data-kn="ವಿಸ್ತೀರ್ಣ = ಉದ್ದ × ಅಗಲ">Area = length × width</strong></div>
-                <div style="margin-bottom: 0.5rem;"><span data-en="Area:" data-kn="ವಿಸ್ತೀರ್ಣ:">Area:</span> <span id="shapeArea">15000</span></div>
-                <div><strong data-en="Perimeter = 2(l + w)" data-kn="ಪರಿಧಿ = 2(ಉದ್ದ + ಅಗಲ)">Perimeter = 2(l + w)</strong></div>
-                <div><span data-en="Perimeter:" data-kn="ಪರಿಧಿ:">Perimeter:</span> <span id="shapePerimeter">500</span></div>
+                <div class="formula-box">
+                    <div style="margin-bottom: 0.5rem;"><strong data-en="Area = length × width" data-kn="ವಿಸ್ತೀರ್ಣ = ಉದ್ದ × ಅಗಲ">Area = length × width</strong></div>
+                    <div style="margin-bottom: 0.5rem;"><span data-en="Area:" data-kn="ವಿಸ್ತೀರ್ಣ:">Area:</span> <span id="shapeArea">15000</span></div>
+                    <div><strong data-en="Perimeter = 2(l + w)" data-kn="ಪರಿಧಿ = 2(ಉದ್ದ + ಅಗಲ)">Perimeter = 2(l + w)</strong></div>
+                    <div><span data-en="Perimeter:" data-kn="ಪರಿಧಿ:">Perimeter:</span> <span id="shapePerimeter">500</span></div>
+                </div>
             </div>
         `;
         updateLanguage();
@@ -304,12 +320,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="canvas-container">
                     <canvas id="shapeCanvas" width="300" height="300"></canvas>
                 </div>
-            </div>
-            <div class="formula-box">
-                <div style="margin-bottom: 0.5rem;"><strong data-en="Area = πr²" data-kn="ವಿಸ್ತೀರ್ಣ = πr²">Area = πr²</strong></div>
-                <div style="margin-bottom: 0.5rem;"><span data-en="Area:" data-kn="ವಿಸ್ತೀರ್ಣ:">Area:</span> <span id="shapeArea">15393.80</span></div>
-                <div><strong data-en="Circumference = 2πr" data-kn="ಪರಿಧಿ = 2πr">Circumference = 2πr</strong></div>
-                <div><span data-en="Circumference:" data-kn="ಪರಿಧಿ:">Circumference:</span> <span id="shapePerimeter">439.82</span></div>
+                <div class="formula-box">
+                    <div style="margin-bottom: 0.5rem;"><strong data-en="Area = πr²" data-kn="ವಿಸ್ತೀರ್ಣ = πr²">Area = πr²</strong></div>
+                    <div style="margin-bottom: 0.5rem;"><span data-en="Area:" data-kn="ವಿಸ್ತೀರ್ಣ:">Area:</span> <span id="shapeArea">15393.80</span></div>
+                    <div><strong data-en="Circumference = 2πr" data-kn="ಪರಿಧಿ = 2πr">Circumference = 2πr</strong></div>
+                    <div><span data-en="Circumference:" data-kn="ಪರಿಧಿ:">Circumference:</span> <span id="shapePerimeter">439.82</span></div>
+                </div>
             </div>
         `;
         updateLanguage();
@@ -461,6 +477,6 @@ document.addEventListener('DOMContentLoaded', () => {
         draw();
     }
 
-    updateDemo('triangle');
+    // Do not show any shape demo by default; wait for user click
     document.querySelector('.shape-item[data-shape="triangle"]').classList.add('selected');
 });

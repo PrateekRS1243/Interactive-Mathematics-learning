@@ -11,13 +11,13 @@
     <nav class="navbar">
         <div class="nav-container">
             <h1 class="logo">
-                <a href="index.html" style="color: inherit; text-decoration: none;">
+                <a href="/" style="color: inherit; text-decoration: none;">
                     <span class="math-icon">📐</span>
                     <span data-en="Interactive Maths" data-kn="ಸಂವಾದಾತ್ಮಕ ಗಣಿತ">Interactive Maths</span>
                 </a>
             </h1>
             <div class="nav-links">
-                <a href="index.html" class="nav-link" data-en="Home" data-kn="ಮುಖಪುಟ">Home</a>
+                <a href="/" class="nav-link" data-en="Home" data-kn="ಮುಖಪುಟ">Home</a>
                 <a href="shapes.html" class="nav-link active" data-en="Shapes" data-kn="ಆಕೃತಿಗಳು">Shapes</a>
                 <a href="volumes.html" class="nav-link" data-en="Volumes" data-kn="ಆಯತನ">Volumes</a>
                 <a href="algebra.html" class="nav-link" data-en="Algebra" data-kn="ಬೀಜಗಣಿತ">Algebra</a>
@@ -89,38 +89,13 @@
 
             <div id="shapeExplanation" class="explanation-box"></div>
 
-            <div class="interactive-demo">
-                <h3 data-en="Interactive Triangle Demo" data-kn="ಸಂವಾದಾತ್ಮಕ ತ್ರಿಭುಜ ಪ್ರದರ್ಶನ">Interactive Triangle Demo</h3>
-                <p data-en="Drag the sliders to change triangle dimensions" data-kn="ತ್ರಿಭುಜದ ಆಯಾಮಗಳನ್ನು ಬದಲಾಯಿಸಲು ಸ್ಲೈಡರ್‌ಗಳನ್ನು ಎಳೆಯಿರಿ">Drag the sliders to change triangle dimensions</p>
-
-                <div class="slider-container">
-                    <div class="slider-label">
-                        <span data-en="Base" data-kn="ಆಧಾರ">Base</span>
-                        <span id="baseValue">100</span>
-                    </div>
-                    <input type="range" min="50" max="200" value="100" class="slider" id="baseSlider">
-                </div>
-
-                <div class="slider-container">
-                    <div class="slider-label">
-                        <span data-en="Height" data-kn="ಎತ್ತರ">Height</span>
-                        <span id="heightValue">100</span>
-                    </div>
-                    <input type="range" min="50" max="200" value="100" class="slider" id="heightSlider">
-                </div>
-
-                <div class="canvas-container">
-                    <canvas id="triangleCanvas" width="300" height="300"></canvas>
-                </div>
-
-                <div class="formula-box">
-                    <strong data-en="Area = ½ × base × height" data-kn="ವಿಸ್ತೀರ್ಣ = ½ × ಆಧಾರ × ಎತ್ತರ">Area = ½ × base × height</strong><br>
-                    <span data-en="Current Area:" data-kn="ಪ್ರಸ್ತುತ ವಿಸ್ತೀರ್ಣ:">Current Area:</span> <span id="triangleArea">5000</span>
-                </div>
-            </div>
+            <!-- Demo container will be created dynamically when a shape is clicked -->
         </div>
     </main>
 
+    <script>
+        try { sessionStorage.setItem('learningVisited', 'true'); } catch (e) {}
+    </script>
     <script src="nav.js"></script>
     <script src="shapes.js"></script>
 </body>
