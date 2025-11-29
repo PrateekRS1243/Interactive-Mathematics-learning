@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Interactive Maths Learning – 10th Standard (Kannada Medium)</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">
+                <a href="/" style="color: inherit; text-decoration: none;">
+                    <span class="math-icon">📐</span>
+                    <span data-en="Interactive Maths" data-kn="ಸಂವಾದಾತ್ಮಕ ಗಣಿತ">Interactive Maths</span>
+                </a>
+            </h1>
+            <button class="lang-toggle" id="langToggle">
+                <span class="toggle-text" data-en="Learn in Kannada" data-kn="Learn in English">Learn in Kannada</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="hero">
+            <div class="hero-content">
+                <h2 class="hero-title" data-en="Interactive Maths Learning" data-kn="ಸಂವಾದಾತ್ಮಕ ಗಣಿತ ಕಲಿಕೆ">Interactive Maths Learning</h2>
+                <p class="hero-subtitle" data-en="10th Standard (Karnataka State Board - Kannada Medium)" data-kn="10ನೇ ತರಗತಿ (ಕರ್ನಾಟಕ ರಾಜ್ಯ ಪಠ್ಯಕ್ರಮ - ಕನ್ನಡ ಮಾಧ್ಯಮ)">10th Standard (Karnataka State Board - Kannada Medium)</p>
+                <div class="hero-icons">
+                    <span class="hero-emoji">📱</span>
+                    <span class="hero-emoji">✏️</span>
+                    <span class="hero-emoji">🎯</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="games-section">
+            <div class="games-container">
+                <h2 class="games-header" data-en="🎮 Practice with Fun Games" data-kn="🎮 ಮೋಜಿನ ಆಟಗಳೊಂದಿಗೆ ಅಭ್ಯಾಸ">🎮 Practice with Fun Games</h2>
+                <p class="games-subtitle" data-en="Choose a game to sharpen your math skills!" data-kn="ನಿಮ್ಮ ಗಣಿತ ಕೌಶಲ್ಯವನ್ನು ಹರಿತಗೊಳಿಸಲು ಆಟವನ್ನು ಆರಿಸಿ!">Choose a game to sharpen your math skills!</p>
+                
+                <div class="games-grid">
+                    <!-- Number Match Game Card -->
+                    <div class="game-card-preview" onclick="openGame('numberMatch')">
+                        <div class="game-card-inner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="game-icon">🎯</div>
+                            <h3 class="game-title" data-en="Number Match" data-kn="ಸಂಖ್ಯೆ ಹೊಂದಾಣಿಕೆ">Number Match</h3>
+                            <p class="game-description" data-en="Test your addition skills with multiple choice questions" data-kn="ಬಹು ಆಯ್ಕೆಯ ಪ್ರಶ್ನೆಗಳೊಂದಿಗೆ ನಿಮ್ಮ ಸಂಕಲನ ಕೌಶಲ್ಯವನ್ನು ಪರೀಕ್ಷಿಸಿ">Test your addition skills with multiple choice questions</p>
+                            <button class="play-btn" data-en="Play Now →" data-kn="ಈಗ ಆಡಿ →">Play Now →</button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Math Quiz Card -->
+                    <div class="game-card-preview" onclick="openGame('quickMath')">
+                        <div class="game-card-inner" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                            <div class="game-icon">⚡</div>
+                            <h3 class="game-title" data-en="Quick Math Quiz" data-kn="ತ್ವರಿತ ಗಣಿತ ಕ್ವಿಜ್">Quick Math Quiz</h3>
+                            <p class="game-description" data-en="30-second challenge with mixed operations" data-kn="ಮಿಶ್ರ ಕ್ರಿಯೆಗಳೊಂದಿಗೆ 30 ಸೆಕೆಂಡುಗಳ ಸವಾಲು">30-second challenge with mixed operations</p>
+                            <button class="play-btn" data-en="Play Now →" data-kn="ಈಗ ಆಡಿ →">Play Now →</button>
+                        </div>
+                    </div>
+
+                    <!-- Pattern Builder Card -->
+                    <div class="game-card-preview" onclick="openGame('pattern')">
+                        <div class="game-card-inner" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <div class="game-icon">🧩</div>
+                            <h3 class="game-title" data-en="Pattern Builder" data-kn="ಮಾದರಿ ನಿರ್ಮಾಣ">Pattern Builder</h3>
+                            <p class="game-description" data-en="Complete number sequences and patterns" data-kn="ಸಂಖ್ಯೆಯ ಅನುಕ್ರಮಗಳು ಮತ್ತು ಮಾದರಿಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ">Complete number sequences and patterns</p>
+                            <button class="play-btn" data-en="Play Now →" data-kn="ಈಗ ಆಡಿ →">Play Now →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Modals -->
+        <!-- Number Match Modal -->
+        <div id="numberMatchModal" class="game-modal">
+            <div class="game-modal-content" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <button class="close-modal" onclick="closeGame('numberMatch')">&times;</button>
+                <div class="game-header">
+                    <h3 class="game-title" data-en="🎯 Number Match" data-kn="🎯 ಸಂಖ್ಯೆ ಹೊಂದಾಣಿಕೆ">🎯 Number Match</h3>
+                    <div class="game-score"><span data-en="Score:" data-kn="ಅಂಕ:">Score:</span> <span id="numberMatchScore">0</span></div>
+                </div>
+                <div class="game-meta"><span id="numberMatchCounter">Question 0 / 10</span></div>
+                <div class="game-progress"><div id="numberMatchProgress" class="game-progress-bar" style="width: 0%"></div></div>
+                <div class="game-content">
+                    <div class="game-question" id="numberMatchQuestion">5 + 3 = ?</div>
+                    <div class="game-options" id="numberMatchOptions">
+                        <button class="game-btn">8</button>
+                        <button class="game-btn">12</button>
+                        <button class="game-btn">6</button>
+                    </div>
+                    <div class="game-feedback" id="numberMatchFeedback"></div>
+                    <div id="numberMatchSummary" class="summary-container" style="display:none;"></div>
+                    <button id="numberMatchReset" class="game-start-btn" style="display:none">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Math Modal -->
+        <div id="quickMathModal" class="game-modal">
+            <div class="game-modal-content" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                <button class="close-modal" onclick="closeGame('quickMath')">&times;</button>
+                <div class="game-header">
+                    <h3 class="game-title" data-en="⚡ Quick Math Quiz" data-kn="⚡ ತ್ವರಿತ ಗಣಿತ ಕ್ವಿಜ್">⚡ Quick Math Quiz</h3>
+                    <div class="game-score"><span data-en="Score:" data-kn="ಅಂಕ:">Score:</span> <span id="quickMathScore">0</span></div>
+                </div>
+                <div class="game-content">
+                    <div class="game-timer" id="quickMathTimer">Time: 30s</div>
+                    <div class="game-question" id="quickMathQuestion">Click Start!</div>
+                    <input type="number" class="game-input" id="quickMathInput" placeholder="Type answer..." disabled>
+                    <button class="game-start-btn" id="quickMathStart">Start Game</button>
+                    <div class="game-feedback" id="quickMathFeedback"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pattern Builder Modal -->
+        <div id="patternModal" class="game-modal">
+            <div class="game-modal-content" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <button class="close-modal" onclick="closeGame('pattern')">&times;</button>
+                <div class="game-header">
+                    <h3 class="game-title" data-en="🧩 Pattern Builder" data-kn="🧩 ಮಾದರಿ ನಿರ್ಮಾಣ">🧩 Pattern Builder</h3>
+                    <div class="game-score"><span data-en="Score:" data-kn="ಅಂಕ:">Score:</span> <span id="patternScore">0</span></div>
+                </div>
+                <div class="game-meta"><span id="patternCounter">Question 0 / 10</span></div>
+                <div class="game-progress"><div id="patternProgress" class="game-progress-bar" style="width: 0%"></div></div>
+                <div class="game-content">
+                    <div class="pattern-display" id="patternDisplay">
+                        <div class="pattern-box">2</div>
+                        <div class="pattern-box">4</div>
+                        <div class="pattern-box">6</div>
+                        <div class="pattern-box">?</div>
+                    </div>
+                    <input type="number" class="game-input" id="patternInput" placeholder="Next number?">
+                    <button class="game-btn" id="patternCheck">Check Answer</button>
+                    <div class="game-feedback" id="patternFeedback"></div>
+                    <div id="patternSummary" class="summary-container" style="display:none;"></div>
+                    <button id="patternReset" class="game-start-btn" style="display:none">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+        <section class="topics-grid">
+            <a href="/shapes.html" class="topic-card" style="--card-color: #4A90E2;">
+                <div class="card-icon">📐</div>
+                <h3 class="card-title" data-en="Basic Figures" data-kn="ಆಧಾರಭೂತ ಆಕೃತಿಗಳು">Basic Figures</h3>
+                <p class="card-desc" data-en="Triangles, Quadrilaterals, Circles" data-kn="ತ್ರಿಭುಜಗಳು, ಚತುರ್ಭುಜಗಳು, ವೃತ್ತಗಳು">Triangles, Quadrilaterals, Circles</p>
+            </a>
+
+            <a href="/volumes.html" class="topic-card" style="--card-color: #50C878;">
+                <div class="card-icon">🧊</div>
+                <h3 class="card-title" data-en="Surface Areas & Volumes" data-kn="ಪೃಶ್ಠಫಲ & ಆಯತನ">Surface Areas & Volumes</h3>
+                <p class="card-desc" data-en="3D Shapes & Calculations" data-kn="3D ಆಕೃತಿಗಳು & ಲೆಕ್ಕಗಳು">3D Shapes & Calculations</p>
+            </a>
+
+            <a href="/algebra.html" class="topic-card" style="--card-color: #FF6B6B;">
+                <div class="card-icon">🔢</div>
+                <h3 class="card-title" data-en="Algebraic Equations" data-kn="ಬೀಜಗಣಿತ ಸಮೀಕರಣಗಳು">Algebraic Equations</h3>
+                <p class="card-desc" data-en="Linear & Quadratic Equations" data-kn="ರೇಖೀಯ & ವರ್ಗ ಸಮೀಕರಣಗಳು">Linear & Quadratic Equations</p>
+            </a>
+
+            <a href="/theorems.html" class="topic-card" style="--card-color: #FFB347;">
+                <div class="card-icon">📊</div>
+                <h3 class="card-title" data-en="Theorems of Triangles" data-kn="ತ್ರಿಭುಜಗಳ ಸಿದ್ಧಾಂತಗಳು">Theorems of Triangles</h3>
+                <p class="card-desc" data-en="Pythagoras & Similar Triangles" data-kn="ಪೈಥಾಗೋರಸ್ & ಸಮಾನ ತ್ರಿಭುಜಗಳು">Pythagoras & Similar Triangles</p>
+            </a>
+
+            <a href="/axioms.html" class="topic-card" style="--card-color: #9B59B6;">
+                <div class="card-icon">📏</div>
+                <h3 class="card-title" data-en="Axioms" data-kn="ಸ್ವೀಕಾರ್ಯಗಳು">Axioms</h3>
+                <p class="card-desc" data-en="Euclid's Axioms & Postulates" data-kn="ಯೂಕ್ಲಿಡ್‌ನ ಸ್ವೀಕಾರ್ಯಗಳು">Euclid's Axioms & Postulates</p>
+            </a>
+
+            <a href="/arithmetic.html" class="topic-card" style="--card-color: #1ABC9C;">
+                <div class="card-icon">➕</div>
+                <h3 class="card-title" data-en="Basic Arithmetic" data-kn="ಮೂಲ ಗಣಿತ">Basic Arithmetic</h3>
+                <p class="card-desc" data-en="Interactive Number Operations" data-kn="ಸಂವಾದಾತ್ಮಕ ಸಂಖ್ಯಾ ಕ್ರಿಯೆಗಳು">Interactive Number Operations</p>
+            </a>
+        </section>
+    </main>
+
+    <script src="./public/nav.js"></script>
+    <script src="./public/games.js"></script>
+</body>
+</html>

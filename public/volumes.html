@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surface Areas & Volumes - Interactive Maths</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">
+                <a href="index.html" style="color: inherit; text-decoration: none;">
+                    <span class="math-icon">📐</span>
+                    <span data-en="Interactive Maths" data-kn="ಸಂವಾದಾತ್ಮಕ ಗಣಿತ">Interactive Maths</span>
+                </a>
+            </h1>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link" data-en="Home" data-kn="ಮುಖಪುಟ">Home</a>
+                <a href="shapes.html" class="nav-link" data-en="Shapes" data-kn="ಆಕೃತಿಗಳು">Shapes</a>
+                <a href="volumes.html" class="nav-link active" data-en="Volumes" data-kn="ಆಯತನ">Volumes</a>
+                <a href="algebra.html" class="nav-link" data-en="Algebra" data-kn="ಬೀಜಗಣಿತ">Algebra</a>
+                <a href="theorems.html" class="nav-link" data-en="Theorems" data-kn="ಸಿದ್ಧಾಂತಗಳು">Theorems</a>
+                <a href="axioms.html" class="nav-link" data-en="Axioms" data-kn="ಸ್ವೀಕಾರ್ಯಗಳು">Axioms</a>
+                <a href="arithmetic.html" class="nav-link" data-en="Arithmetic" data-kn="ಗಣಿತ">Arithmetic</a>
+            </div>
+            <button class="lang-toggle" id="langToggle">
+                <span class="toggle-text" data-en="Learn in Kannada" data-kn="Learn in English">Learn in Kannada</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content page-content">
+        <div class="shape-container">
+            <h2 class="shape-title">
+                🧊 <span data-en="Surface Areas & Volumes" data-kn="ಪೃಶ್ಠಫಲ & ಆಯತನ">Surface Areas & Volumes</span>
+            </h2>
+
+            <div class="shape-grid">
+                <div class="shape-item" data-3dshape="cube">
+                    <svg class="shape-svg" viewBox="0 0 200 200">
+                        <path d="M60,80 L140,80 L140,160 L60,160 Z" fill="#4A90E2" stroke="#2C3E50" stroke-width="2"/>
+                        <path d="M60,80 L90,50 L170,50 L140,80 Z" fill="#6BA5E7" stroke="#2C3E50" stroke-width="2"/>
+                        <path d="M140,80 L170,50 L170,130 L140,160 Z" fill="#357ABD" stroke="#2C3E50" stroke-width="2"/>
+                    </svg>
+                    <div class="shape-name" data-en="Cube" data-kn="ಘನ">Cube</div>
+                    <div class="shape-info" data-en="6 equal square faces" data-kn="6 ಸಮಾನ ಚೌಕಾಕೃತಿ ಮುಖಗಳು">6 equal square faces</div>
+                </div>
+
+                <div class="shape-item" data-3dshape="cuboid">
+                    <svg class="shape-svg" viewBox="0 0 200 200">
+                        <path d="M50,90 L150,90 L150,160 L50,160 Z" fill="#50C878" stroke="#2C3E50" stroke-width="2"/>
+                        <path d="M50,90 L80,60 L180,60 L150,90 Z" fill="#6FD892" stroke="#2C3E50" stroke-width="2"/>
+                        <path d="M150,90 L180,60 L180,130 L150,160 Z" fill="#3FAD5E" stroke="#2C3E50" stroke-width="2"/>
+                    </svg>
+                    <div class="shape-name" data-en="Cuboid" data-kn="ಆಯತಘನ">Cuboid</div>
+                    <div class="shape-info" data-en="6 rectangular faces" data-kn="6 ಆಯತಾಕೃತಿ ಮುಖಗಳು">6 rectangular faces</div>
+                </div>
+
+                <div class="shape-item" data-3dshape="cylinder">
+                    <svg class="shape-svg" viewBox="0 0 200 200">
+                        <ellipse cx="100" cy="60" rx="60" ry="20" fill="#FF6B6B" stroke="#2C3E50" stroke-width="2"/>
+                        <rect x="40" y="60" width="120" height="100" fill="#FF6B6B" stroke="none"/>
+                        <line x1="40" y1="60" x2="40" y2="160" stroke="#2C3E50" stroke-width="2"/>
+                        <line x1="160" y1="60" x2="160" y2="160" stroke="#2C3E50" stroke-width="2"/>
+                        <ellipse cx="100" cy="160" rx="60" ry="20" fill="#E85555" stroke="#2C3E50" stroke-width="2"/>
+                    </svg>
+                    <div class="shape-name" data-en="Cylinder" data-kn="ಸಿಲಿಂಡರ್">Cylinder</div>
+                    <div class="shape-info" data-en="2 circular bases" data-kn="2 ವೃತ್ತಾಕಾರ ತಳಗಳು">2 circular bases</div>
+                </div>
+
+                <div class="shape-item" data-3dshape="sphere">
+                    <svg class="shape-svg" viewBox="0 0 200 200">
+                        <defs>
+                            <radialGradient id="sphereGrad">
+                                <stop offset="0%" style="stop-color:#FFB347;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#E89020;stop-opacity:1" />
+                            </radialGradient>
+                        </defs>
+                        <circle cx="100" cy="100" r="70" fill="url(#sphereGrad)" stroke="#2C3E50" stroke-width="2"/>
+                    </svg>
+                    <div class="shape-name" data-en="Sphere" data-kn="ಗೋಳ">Sphere</div>
+                    <div class="shape-info" data-en="Perfectly round 3D shape" data-kn="ಸಂಪೂರ್ಣ ವೃತ್ತಾಕಾರ 3D ಆಕೃತಿ">Perfectly round 3D shape</div>
+                </div>
+            </div>
+
+            <div id="volumeExplanation" class="explanation-box"></div>
+
+            <div class="interactive-demo">
+                <h3 data-en="Calculate Volume" data-kn="ಆಯತನ ಲೆಕ್ಕಾಚಾರ">Calculate Volume</h3>
+
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span data-en="Length" data-kn="ಉದ್ದ">Length</span>
+                        <span id="lengthValue">10</span> <span data-en="units" data-kn="ಘಟಕಗಳು">units</span>
+                    </div>
+                    <input type="range" min="1" max="20" value="10" class="slider" id="lengthSlider">
+                </div>
+
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span data-en="Width" data-kn="ಅಗಲ">Width</span>
+                        <span id="widthValue">10</span> <span data-en="units" data-kn="ಘಟಕಗಳು">units</span>
+                    </div>
+                    <input type="range" min="1" max="20" value="10" class="slider" id="widthSlider">
+                </div>
+
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span data-en="Height" data-kn="ಎತ್ತರ">Height</span>
+                        <span id="depthValue">10</span> <span data-en="units" data-kn="ಘಟಕಗಳು">units</span>
+                    </div>
+                    <input type="range" min="1" max="20" value="10" class="slider" id="depthSlider">
+                </div>
+
+                <div class="formula-box">
+                    <strong data-en="Cuboid Volume = Length × Width × Height" data-kn="ಆಯತಘನ ಆಯತನ = ಉದ್ದ × ಅಗಲ × ಎತ್ತರ">Cuboid Volume = Length × Width × Height</strong><br>
+                    <span data-en="Volume:" data-kn="ಆಯತನ:">Volume:</span> <span id="volumeResult">1000</span> <span data-en="cubic units" data-kn="ಘನ ಘಟಕಗಳು">cubic units</span>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-text" data-en="Question: Find the volume of a cube with side 5 cm" data-kn="ಪ್ರಶ್ನೆ: 5 ಸೆಂ.ಮೀ ಬಾಹುವಿರುವ ಘನದ ಆಯತನ ಕಂಡುಹಿಡಿಯಿರಿ">Question: Find the volume of a cube with side 5 cm</div>
+                <button class="btn-primary" onclick="toggleAnswer('answer1')">
+                    <span data-en="Show Answer" data-kn="ಉತ್ತರ ತೋರಿಸಿ">Show Answer</span>
+                </button>
+                <div class="answer-box" id="answer1">
+                    <strong data-en="Answer:" data-kn="ಉತ್ತರ:">Answer:</strong><br>
+                    <span data-en="Volume = side³ = 5³ = 125 cm³" data-kn="ಆಯತನ = ಬಾಹು³ = 5³ = 125 ಸೆಂ.ಮೀ³">Volume = side³ = 5³ = 125 cm³</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="nav.js"></script>
+    <script src="volumes.js"></script>
+</body>
+</html>
