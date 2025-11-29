@@ -70,6 +70,16 @@
                             <button class="play-btn" data-en="Play Now →" data-kn="ಈಗ ಆಡಿ →">Play Now →</button>
                         </div>
                     </div>
+
+                    <!-- Formula Builder Card -->
+                    <div class="game-card-preview" onclick="openGame('formulaMemory')">
+                        <div class="game-card-inner" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <div class="game-icon">🏛️</div>
+                            <h3 class="game-title" data-en="Formula Builder" data-kn="ಸೂತ್ರ ನಿರ್ಮಾಣ">Formula Builder</h3>
+                            <p class="game-description" data-en="Build formulas by selecting the right parts - learn by doing!" data-kn="ಸರಿಯಾದ ಭಾಗಗಳನ್ನು ಆರಿಸುವ ಮೂಲಕ ಸೂತ್ರಗಳನ್ನು ನಿರ್ಮಿಸಿ - ಮಾಡುವ ಮೂಲಕ ಕಲಿಯಿರಿ!">Build formulas by selecting the right parts - learn by doing!</p>
+                            <button class="play-btn" data-en="Play Now →" data-kn="ಈಗ ಆಡಿ →">Play Now →</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -77,11 +87,22 @@
         <!-- Game Modals -->
         <!-- Number Match Modal -->
         <div id="numberMatchModal" class="game-modal">
-            <div class="game-modal-content" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="game-modal-content modal-purple">
                 <button class="close-modal" onclick="closeGame('numberMatch')">&times;</button>
+                <button class="instructions-toggle" onclick="toggleInstructions('numberMatch')" data-en="ℹ️ How to Play" data-kn="ℹ️ ಹೇಗೆ ಆಡಬೇಕು">ℹ️ How to Play</button>
                 <div class="game-header">
                     <h3 class="game-title" data-en="🎯 Number Match" data-kn="🎯 ಸಂಖ್ಯೆ ಹೊಂದಾಣಿಕೆ">🎯 Number Match</h3>
                     <div class="game-score"><span data-en="Score:" data-kn="ಅಂಕ:">Score:</span> <span id="numberMatchScore">0</span></div>
+                </div>
+                <div id="numberMatchInstructions" class="instructions-panel" style="display:none;">
+                    <h4 class="instructions-title" data-en="📖 How to Play" data-kn="📖 ಹೇಗೆ ಆಡಬೇಕು">📖 How to Play</h4>
+                    <ul class="instructions-list">
+                        <li data-en="Solve 10 addition problems as quickly as possible" data-kn="ಸಾಧ್ಯವಾದಷ್ಟು ವೇಗವಾಗಿ 10 ಸಂಕಲನ ಸಮಸ್ಯೆಗಳನ್ನು ಪರಿಹರಿಸಿ">Solve 10 addition problems as quickly as possible</li>
+                        <li data-en="Click on the correct answer from 3 choices" data-kn="3 ಆಯ್ಕೆಗಳಿಂದ ಸರಿಯಾದ ಉತ್ತರವನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ">Click on the correct answer from 3 choices</li>
+                        <li data-en="Each correct answer gives you 10 points" data-kn="ಪ್ರತಿ ಸರಿಯಾದ ಉತ್ತರವು ನಿಮಗೆ 10 ಅಂಕಗಳನ್ನು ನೀಡುತ್ತದೆ">Each correct answer gives you 10 points</li>
+                        <li data-en="Track your progress with the bar at the top" data-kn="ಮೇಲಿನ ಪಟ್ಟಿಯೊಂದಿಗೆ ನಿಮ್ಮ ಪ್ರಗತಿಯನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ">Track your progress with the bar at the top</li>
+                    </ul>
+                    <button class="back-to-game-btn" onclick="toggleInstructions('numberMatch')" data-en="▶️ Back to Game" data-kn="▶️ ಆಟಕ್ಕೆ ಹಿಂತಿರುಗಿ">▶️ Back to Game</button>
                 </div>
                 <div class="game-meta"><span id="numberMatchCounter">Question 0 / 10</span></div>
                 <div class="game-progress"><div id="numberMatchProgress" class="game-progress-bar" style="width: 0%"></div></div>
@@ -101,11 +122,22 @@
 
         <!-- Quick Math Modal -->
         <div id="quickMathModal" class="game-modal">
-            <div class="game-modal-content" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+            <div class="game-modal-content modal-green">
                 <button class="close-modal" onclick="closeGame('quickMath')">&times;</button>
+                <button class="instructions-toggle" onclick="toggleInstructions('quickMath')" data-en="ℹ️ How to Play" data-kn="ℹ️ ಹೇಗೆ ಆಡಬೇಕು">ℹ️ How to Play</button>
                 <div class="game-header">
                     <h3 class="game-title" data-en="⚡ Quick Math Quiz" data-kn="⚡ ತ್ವರಿತ ಗಣಿತ ಕ್ವಿಜ್">⚡ Quick Math Quiz</h3>
                     <div class="game-score"><span data-en="Score:" data-kn="ಅಂಕ:">Score:</span> <span id="quickMathScore">0</span></div>
+                </div>
+                <div id="quickMathInstructions" class="instructions-panel" style="display:none;">
+                    <h4 class="instructions-title" data-en="📖 How to Play" data-kn="📖 ಹೇಗೆ ಆಡಬೇಕು">📖 How to Play</h4>
+                    <ul class="instructions-list">
+                        <li data-en="Race against the 30-second countdown timer" data-kn="30-ಸೆಕೆಂಡ್ ಕೌಂಟ್‌ಡೌನ್ ಟೈಮರ್ ವಿರುದ್ಧ ಓಟ">Race against the 30-second countdown timer</li>
+                        <li data-en="Type your answer and press Enter or click Submit" data-kn="ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಟೈಪ್ ಮಾಡಿ ಮತ್ತು ಎಂಟರ್ ಒತ್ತಿರಿ ಅಥವಾ ಸಲ್ಲಿಸು ಕ್ಲಿಕ್ ಮಾಡಿ">Type your answer and press Enter or click Submit</li>
+                        <li data-en="Solve addition, subtraction, and multiplication problems" data-kn="ಸಂಕಲನ, ವ್ಯವಕಲನ ಮತ್ತು ಗುಣಾಕಾರ ಸಮಸ್ಯೆಗಳನ್ನು ಪರಿಹರಿಸಿ">Solve addition, subtraction, and multiplication problems</li>
+                        <li data-en="Try to answer as many as possible before time runs out!" data-kn="ಸಮಯ ಮುಗಿಯುವ ಮೊದಲು ಸಾಧ್ಯವಾದಷ್ಟು ಉತ್ತರಿಸಲು ಪ್ರಯತ್ನಿಸಿ!">Try to answer as many as possible before time runs out!</li>
+                    </ul>
+                    <button class="back-to-game-btn" onclick="toggleInstructions('quickMath')" data-en="▶️ Back to Game" data-kn="▶️ ಆಟಕ್ಕೆ ಹಿಂತಿರುಗಿ">▶️ Back to Game</button>
                 </div>
                 <div class="game-content">
                     <div class="game-timer" id="quickMathTimer">Time: 30s</div>
@@ -119,11 +151,22 @@
 
         <!-- Pattern Builder Modal -->
         <div id="patternModal" class="game-modal">
-            <div class="game-modal-content" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            <div class="game-modal-content modal-pink">
                 <button class="close-modal" onclick="closeGame('pattern')">&times;</button>
+                <button class="instructions-toggle" onclick="toggleInstructions('pattern')" data-en="ℹ️ How to Play" data-kn="ℹ️ ಹೇಗೆ ಆಡಬೇಕು">ℹ️ How to Play</button>
                 <div class="game-header">
                     <h3 class="game-title" data-en="🧩 Pattern Builder" data-kn="🧩 ಮಾದರಿ ನಿರ್ಮಾಣ">🧩 Pattern Builder</h3>
                     <div class="game-score"><span data-en="Score:" data-kn="ಅಂಕ:">Score:</span> <span id="patternScore">0</span></div>
+                </div>
+                <div id="patternInstructions" class="instructions-panel" style="display:none;">
+                    <h4 class="instructions-title" data-en="📖 How to Play" data-kn="📖 ಹೇಗೆ ಆಡಬೇಕು">📖 How to Play</h4>
+                    <ul class="instructions-list">
+                        <li data-en="Study the number sequence carefully" data-kn="ಸಂಖ್ಯೆಯ ಅನುಕ್ರಮವನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ಅಧ್ಯಯನ ಮಾಡಿ">Study the number sequence carefully</li>
+                        <li data-en="Find the pattern or rule in the sequence" data-kn="ಅನುಕ್ರಮದಲ್ಲಿ ಮಾದರಿ ಅಥವಾ ನಿಯಮವನ್ನು ಹುಡುಕಿ">Find the pattern or rule in the sequence</li>
+                        <li data-en="Type the missing number to complete the sequence" data-kn="ಅನುಕ್ರಮವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಕಾಣೆಯಾದ ಸಂಖ್ಯೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ">Type the missing number to complete the sequence</li>
+                        <li data-en="Complete 10 patterns to finish the game" data-kn="ಆಟವನ್ನು ಮುಗಿಸಲು 10 ಮಾದರಿಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ">Complete 10 patterns to finish the game</li>
+                    </ul>
+                    <button class="back-to-game-btn" onclick="toggleInstructions('pattern')" data-en="▶️ Back to Game" data-kn="▶️ ಆಟಕ್ಕೆ ಹಿಂತಿರುಗಿ">▶️ Back to Game</button>
                 </div>
                 <div class="game-meta"><span id="patternCounter">Question 0 / 10</span></div>
                 <div class="game-progress"><div id="patternProgress" class="game-progress-bar" style="width: 0%"></div></div>
@@ -139,6 +182,52 @@
                     <div class="game-feedback" id="patternFeedback"></div>
                     <div id="patternSummary" class="summary-container" style="display:none;"></div>
                     <button id="patternReset" class="game-start-btn" style="display:none">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formula Builder Modal -->
+        <div id="formulaMemoryModal" class="game-modal">
+            <div class="game-modal-content modal-orange">
+                <button class="close-modal" onclick="closeGame('formulaMemory')">&times;</button>
+                <button class="instructions-toggle" onclick="toggleInstructions('formulaMemory')" data-en="ℹ️ How to Play" data-kn="ℹ️ ಹೇಗೆ ಆಡಬೇಕು">ℹ️ How to Play</button>
+                <div class="game-header">
+                    <h3 class="game-title" data-en="🏛️ Formula Builder" data-kn="🏛️ ಸೂತ್ರ ನಿರ್ಮಾಣ">🏛️ Formula Builder</h3>
+                    <div class="game-score"><span data-en="Score:" data-kn="ಅಂಕ:">Score:</span> <span id="formulaScore">0 / 100</span></div>
+                </div>
+                <div id="formulaMemoryInstructions" class="instructions-panel" style="display:none;">
+                    <h4 class="instructions-title" data-en="📖 How to Play" data-kn="📖 ಹೇಗೆ ಆಡಬೇಕು">📖 How to Play</h4>
+                    <ul class="instructions-list">
+                        <li data-en="Review all formulas during the 30-second learning phase" data-kn="30-ಸೆಕೆಂಡ್ ಕಲಿಕೆಯ ಹಂತದಲ್ಲಿ ಎಲ್ಲಾ ಸೂತ್ರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ">Review all formulas during the 30-second learning phase</li>
+                        <li data-en="Click 'Skip' to start playing immediately" data-kn="ತಕ್ಷಣ ಆಡಲು ಪ್ರಾರಂಭಿಸಲು 'ಸ್ಕಿಪ್' ಕ್ಲಿಕ್ ಮಾಡಿ">Click 'Skip' to start playing immediately</li>
+                        <li data-en="Build the correct formula by clicking the right parts in order" data-kn="ಸರಿಯಾದ ಭಾಗಗಳನ್ನು ಕ್ರಮದಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡುವ ಮೂಲಕ ಸರಿಯಾದ ಸೂತ್ರವನ್ನು ನಿರ್ಮಿಸಿ">Build the correct formula by clicking the right parts in order</li>
+                        <li data-en="Each formula is worth 10 points - complete all 10!" data-kn="ಪ್ರತಿ ಸೂತ್ರ 10 ಅಂಕಗಳ ಮೌಲ್ಯದ್ದಾಗಿದೆ - ಎಲ್ಲಾ 10 ಪೂರ್ಣಗೊಳಿಸಿ!">Each formula is worth 10 points - complete all 10!</li>
+                    </ul>
+                    <button class="back-to-game-btn" onclick="toggleInstructions('formulaMemory')" data-en="▶️ Back to Game" data-kn="▶️ ಆಟಕ್ಕೆ ಹಿಂತಿರುಗಿ">▶️ Back to Game</button>
+                </div>
+                <div class="game-meta"><span id="formulaCounter">Question 0 / 10</span></div>
+                <div class="game-progress"><div id="formulaProgress" class="game-progress-bar" style="width: 0%"></div></div>
+                <div class="game-content">
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+                        <div class="game-timer" id="formulaCountdown" style="display:none">Time: 30s</div>
+                        <button class="game-start-btn" id="formulaSkip" style="display:none" data-en="Skip" data-kn="ಬಿಡಿ">Skip</button>
+                    </div>
+                    <div class="formula-prompt" id="formulaPrompt">What is the formula for:</div>
+                    <div class="formula-target" id="formulaTarget">Circle Area</div>
+                    <div id="formulaLearnList" style="display:none; margin: 8px 0 12px 0; border-radius: 16px; padding: 14px; max-height: 350px; overflow: auto;">
+                        <!-- Populated during countdown with formulas to glance -->
+                    </div>
+                    <div class="formula-workspace">
+                        <div class="formula-display" id="formulaDisplay">
+                            <span class="formula-placeholder" data-en="Build formula here..." data-kn="ಇಲ್ಲಿ ಸೂತ್ರ ನಿರ್ಮಿಸಿ...">Build formula here...</span>
+                        </div>
+                        <button class="formula-clear-btn" id="formulaClear" data-en="Clear" data-kn="ಸ್ವಚ್ಛಗೊಳಿಸಿ">Clear</button>
+                    </div>
+                    <div class="formula-parts" id="formulaParts"></div>
+                    <button class="game-btn" id="formulaSubmit" data-en="Check Answer" data-kn="ಉತ್ತರ ಪರಿಶೀಲಿಸಿ">Check Answer</button>
+                    <div class="game-feedback" id="formulaFeedback"></div>
+                    <div id="formulaSummary" class="summary-container" style="display:none;"></div>
+                    <button id="formulaReset" class="game-start-btn" style="display:none">Play Again</button>
                 </div>
             </div>
         </div>
@@ -182,7 +271,7 @@
         </section>
     </main>
 
-    <script src="./public/nav.js"></script>
-    <script src="./public/games.js"></script>
+    <script src="/nav.js"></script>
+    <script src="/games.js"></script>
 </body>
 </html>

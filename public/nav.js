@@ -27,3 +27,42 @@ document.addEventListener('DOMContentLoaded', () => {
         langToggle.addEventListener('click', toggleLanguage);
     }
 });
+
+// Instructions toggle function
+function toggleInstructions(gameName) {
+    const instructionsId = gameName + 'Instructions';
+    const instructionsPanel = document.getElementById(instructionsId);
+    const gameContent = instructionsPanel?.nextElementSibling;
+    
+    if (instructionsPanel) {
+        if (instructionsPanel.style.display === 'none' || !instructionsPanel.style.display) {
+            instructionsPanel.style.display = 'block';
+            if (gameContent && gameContent.classList.contains('game-meta')) {
+                // Hide game content while showing instructions
+                let current = gameContent;
+                while (current && !current.classList.contains('game-modal-content')) {
+                    if (current.classList.contains('game-meta') || 
+                        current.classList.contains('game-progress') || 
+                        current.classList.contains('game-content')) {
+                        current.style.display = 'none';
+                    }
+                    current = current.nextElementSibling;
+                }
+            }
+        } else {
+            instructionsPanel.style.display = 'none';
+            // Show game content again
+            if (gameContent) {
+                let current = gameContent;
+                while (current && !current.classList.contains('game-modal-content')) {
+                    if (current.classList.contains('game-meta') || 
+                        current.classList.contains('game-progress') || 
+                        current.classList.contains('game-content')) {
+                        current.style.display = '';
+                    }
+                    current = current.nextElementSibling;
+                }
+            }
+        }
+    }
+}

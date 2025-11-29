@@ -30,7 +30,8 @@ const translations = {
         startGame: 'Start Game',
         typeAnswer: 'Type answer...',
         nextNumber: 'Next number?',
-        checkAnswer: 'Check Answer'
+        checkAnswer: 'Check Answer',
+        learningPhase: 'Learning Phase – Review All Formulas'
     },
     kn: {
         question: 'ಪ್ರಶ್ನೆ',
@@ -58,9 +59,32 @@ const translations = {
         startGame: 'ಆಟ ಪ್ರಾರಂಭಿಸಿ',
         typeAnswer: 'ಉತ್ತರ ಟೈಪ್ ಮಾಡಿ...',
         nextNumber: 'ಮುಂದಿನ ಸಂಖ್ಯೆ?',
-        checkAnswer: 'ಉತ್ತರ ಪರಿಶೀಲಿಸಿ'
+        checkAnswer: 'ಉತ್ತರ ಪರಿಶೀಲಿಸಿ',
+        learningPhase: 'ಅಭ್ಯಾಸ ಹಂತ – ಎಲ್ಲಾ ಸೂತ್ರಗಳನ್ನು ನೋಡಿ'
     }
 };
+
+// ---------------- Formula Builder State (moved earlier for countdown access) ----------------
+let formulaScore = 0;
+let formulaCurrent = 0;
+const FORMULA_MAX = 100;
+const FORMULA_TOTAL = 10;
+let formulaMistakes = [];
+let currentFormulaQuestion = null;
+let selectedParts = [];
+// Available questions for formula builder
+const formulaQuestions = [
+    { name: 'Circle Area', formula: ['π', 'r', '²'], parts: ['π', 'r', '²', '2', 'h', 'a', 'b', 'c'] },
+    { name: 'Square Area', formula: ['a', '²'], parts: ['a', '²', 'π', 'r', '2', 'h', '4', '3'] },
+    { name: 'Rectangle Area', formula: ['l', '×', 'w'], parts: ['l', 'w', '×', 'h', '+', 'a', 'b', '²'] },
+    { name: 'Triangle Area', formula: ['½', '×', 'b', '×', 'h'], parts: ['½', 'b', 'h', '×', 'a', 'r', '²', '+'] },
+    { name: 'Cube Volume', formula: ['a', '³'], parts: ['a', '³', '²', 'π', 'r', 'h', '4', 'l'] },
+    { name: 'Cylinder Volume', formula: ['π', 'r', '²', 'h'], parts: ['π', 'r', '²', 'h', 'a', '3', '×', '4'] },
+    { name: 'Sphere Volume', formula: ['(', '4', '/', '3', ')', 'π', 'r', '³'], parts: ['4', '3', '/', 'π', 'r', '³', '(', ')', '2', 'h'] },
+    { name: 'Pythagoras Theorem', formula: ['a', '²', '+', 'b', '²', '=', 'c', '²'], parts: ['a', 'b', 'c', '²', '+', '=', '×', 'π'] },
+    { name: 'Circle Perimeter', formula: ['2', 'π', 'r'], parts: ['2', 'π', 'r', '4', 'h', 'a', '×', '²'] },
+    { name: 'Cone Volume', formula: ['(', '1', '/', '3', ')', 'π', 'r', '²', 'h'], parts: ['1', '3', '/', 'π', 'r', '²', 'h', '(', ')', '4'] }
+];
 
 // Get translation
 function t(key) {
@@ -92,7 +116,136 @@ window.openGame = function(gameType) {
         generateNumberMatchQuestion();
     } else if (gameType === 'pattern') {
         generatePattern();
+    } else if (gameType === 'formulaMemory') {
+        // Attach event listeners to existing HTML ids
+        const clearBtn = document.getElementById('formulaClear');
+        const submitBtn = document.getElementById('formulaSubmit');
+        const replayBtn = document.getElementById('formulaReset');
+        const skipBtn = document.getElementById('formulaSkip');
+        if (clearBtn) clearBtn.onclick = clearFormula;
+        if (submitBtn) submitBtn.onclick = checkFormulaAnswer;
+        if (replayBtn) replayBtn.onclick = resetFormula;
+        if (skipBtn) skipBtn.onclick = skipFormulaCountdown;
+        startFormulaCountdown();
     }
+}
+// --- Formula Builder: 30s pre-round countdown ---
+let formulaCountdownTimer = null;
+function startFormulaCountdown() {
+    const parts = document.getElementById('formulaParts');
+    const submitBtn = document.getElementById('formulaSubmit');
+    const clearBtn = document.getElementById('formulaClear');
+    const feedback = document.getElementById('formulaFeedback');
+    const counter = document.getElementById('formulaCounter');
+    const countdownEl = document.getElementById('formulaCountdown');
+    const progressEl = document.getElementById('formulaProgress');
+    const skipBtn = document.getElementById('formulaSkip');
+    const learnList = document.getElementById('formulaLearnList');
+    const scoreEl = document.getElementById('formulaScore');
+
+    // Reset visible UI for a new learning phase
+    if (feedback) feedback.textContent = '';
+    if (progressEl) progressEl.style.width = '0%';
+    if (scoreEl) scoreEl.textContent = '0 / 100';
+    if (counter) counter.textContent = t('learningPhase');
+    // Hide building UI during learning phase
+    const promptEl = document.getElementById('formulaPrompt');
+    const targetEl = document.getElementById('formulaTarget');
+    const workspaceEl = document.querySelector('.formula-workspace');
+    // Completely hide builder UI during learning phase
+    if (promptEl) promptEl.style.display = 'none';
+    if (targetEl) targetEl.style.display = 'none';
+    if (workspaceEl) {
+        workspaceEl.style.display = 'none';
+        workspaceEl.style.pointerEvents = 'none';
+    }
+
+    selectedParts = [];
+    const display = document.getElementById('formulaDisplay');
+    if (display) display.innerHTML = '<span class="formula-placeholder">' + (gamesLanguage === 'kn' ? 'ಇಲ್ಲಿ ಸೂತ್ರ ನಿರ್ಮಿಸಿ...' : 'Build formula here...') + '</span>';
+    if (parts) parts.innerHTML = '';
+    if (submitBtn) submitBtn.disabled = true;
+    if (clearBtn) clearBtn.disabled = true;
+    if (countdownEl) countdownEl.style.display = 'block';
+    if (skipBtn) skipBtn.style.display = 'inline-block';
+
+    // Show formula list to learn
+    if (learnList) {
+        learnList.style.display = 'block';
+        let html = '';
+        if (typeof formulaQuestions !== 'undefined') {
+            formulaQuestions.forEach(q => {
+                const formulaStr = q.formula.join('');
+                html += `<div class=\"learn-item\">
+                            <div class=\"learn-name\">${q.name}</div>
+                            <div class=\"learn-formula\">${formulaStr}</div>
+                        </div>`;
+            });
+        }
+        learnList.innerHTML = html;
+    }
+
+    // Setup countdown
+    let timeLeft = 30;
+    if (countdownEl) countdownEl.textContent = `${t('time') || 'Time'}: ${timeLeft}s`;
+
+    if (formulaCountdownTimer) {
+        clearInterval(formulaCountdownTimer);
+        formulaCountdownTimer = null;
+    }
+    formulaScore = 0;
+    formulaCurrent = 0;
+    formulaMistakes = [];
+
+    formulaCountdownTimer = setInterval(() => {
+        timeLeft--;
+        if (countdownEl) countdownEl.textContent = `${t('time') || 'Time'}: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(formulaCountdownTimer);
+            formulaCountdownTimer = null;
+            if (countdownEl) countdownEl.style.display = 'none';
+            if (skipBtn) skipBtn.style.display = 'none';
+            if (learnList) { learnList.style.display = 'none'; learnList.innerHTML = ''; }
+            if (submitBtn) submitBtn.disabled = false;
+            if (clearBtn) clearBtn.disabled = false;
+            // Restore UI visibility
+            if (promptEl) promptEl.style.display = 'block';
+            if (targetEl) targetEl.style.display = 'block';
+            if (workspaceEl) {
+                workspaceEl.style.display = 'flex';
+                workspaceEl.style.pointerEvents = 'auto';
+            }
+            resetFormula();
+        }
+    }, 1000);
+}
+
+function skipFormulaCountdown() {
+    const countdownEl = document.getElementById('formulaCountdown');
+    const submitBtn = document.getElementById('formulaSubmit');
+    const clearBtn = document.getElementById('formulaClear');
+    const skipBtn = document.getElementById('formulaSkip');
+    if (formulaCountdownTimer) {
+        clearInterval(formulaCountdownTimer);
+        formulaCountdownTimer = null;
+    }
+    if (countdownEl) countdownEl.style.display = 'none';
+    if (skipBtn) skipBtn.style.display = 'none';
+    if (submitBtn) submitBtn.disabled = false;
+    if (clearBtn) clearBtn.disabled = false;
+    const learnList = document.getElementById('formulaLearnList');
+    if (learnList) { learnList.style.display = 'none'; learnList.innerHTML = ''; }
+    // Restore UI visibility when skipping
+    const promptEl = document.getElementById('formulaPrompt');
+    const targetEl = document.getElementById('formulaTarget');
+    const workspaceEl = document.querySelector('.formula-workspace');
+    if (promptEl) promptEl.style.display = 'block';
+    if (targetEl) targetEl.style.display = 'block';
+    if (workspaceEl) {
+        workspaceEl.style.display = 'flex';
+        workspaceEl.style.pointerEvents = 'auto';
+    }
+    resetFormula();
 }
 
 window.closeGame = function(gameType) {
@@ -111,6 +264,8 @@ window.closeGame = function(gameType) {
         }
     } else if (gameType === 'pattern') {
         resetPattern();
+    } else if (gameType === 'formulaMemory') {
+        resetFormula();
     }
 }
 
@@ -127,6 +282,8 @@ window.onclick = function(event) {
             endQuickMath();
         } else if (event.target.id === 'patternModal') {
             resetPattern();
+        } else if (event.target.id === 'formulaMemoryModal') {
+            resetFormula();
         }
     }
 }
@@ -540,6 +697,158 @@ function renderPatternSummary() {
     container.innerHTML = html;
 }
 
+// (Removed duplicate formula builder state; now defined earlier)
+
+function generateFormulaQuestion() {
+    if (formulaCurrent >= FORMULA_TOTAL) {
+        const feedback = document.getElementById('formulaFeedback');
+        const resetBtn = document.getElementById('formulaReset');
+        const summaryContainer = document.getElementById('formulaSummary');
+        if (feedback) feedback.textContent = `${t('sessionComplete')} ${formulaScore} / ${FORMULA_TOTAL * 10}`;
+        if (resetBtn) {
+            resetBtn.style.display = 'block';
+            resetBtn.textContent = t('playAgain');
+        }
+        if (summaryContainer) {
+            renderFormulaSummary();
+            summaryContainer.style.display = 'block';
+        }
+        return;
+    }
+
+    const question = formulaQuestions[formulaCurrent];
+    currentFormulaQuestion = question;
+    selectedParts = [];
+
+    document.getElementById('formulaTarget').textContent = question.name;
+    document.getElementById('formulaDisplay').innerHTML = '<span class="formula-placeholder">' + (gamesLanguage === 'kn' ? 'ಇಲ್ಲಿ ಸೂತ್ರ ನಿರ್ಮಿಸಿ...' : 'Build formula here...') + '</span>';
+    document.getElementById('formulaFeedback').textContent = '';
+    
+    const counterEl = document.getElementById('formulaCounter');
+    if (counterEl) counterEl.textContent = `${t('question')} ${formulaCurrent + 1} / ${FORMULA_TOTAL}`;
+
+    // Render formula parts
+    const partsContainer = document.getElementById('formulaParts');
+    partsContainer.innerHTML = '';
+    
+    question.parts.forEach((part, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'formula-part-btn';
+        btn.textContent = part;
+        btn.onclick = () => addFormulaPart(part, btn);
+        btn.dataset.index = index;
+        partsContainer.appendChild(btn);
+    });
+}
+
+function addFormulaPart(part, btnElement) {
+    selectedParts.push(part);
+    btnElement.classList.add('used');
+    updateFormulaDisplay();
+}
+
+function updateFormulaDisplay() {
+    const display = document.getElementById('formulaDisplay');
+    if (selectedParts.length === 0) {
+        display.innerHTML = '<span class="formula-placeholder">' + (gamesLanguage === 'kn' ? 'ಇಲ್ಲಿ ಸೂತ್ರ ನಿರ್ಮಿಸಿ...' : 'Build formula here...') + '</span>';
+    } else {
+        display.innerHTML = selectedParts.map(p => `<span class="formula-part-selected">${p}</span>`).join('');
+    }
+}
+
+function clearFormula() {
+    selectedParts = [];
+    updateFormulaDisplay();
+    // Re-enable all buttons
+    document.querySelectorAll('.formula-part-btn').forEach(btn => {
+        btn.classList.remove('used');
+    });
+}
+
+function checkFormulaAnswer() {
+    if (selectedParts.length === 0) return;
+
+    const feedback = document.getElementById('formulaFeedback');
+    const progressEl = document.getElementById('formulaProgress');
+    const correctFormula = currentFormulaQuestion.formula.join('');
+    const userFormula = selectedParts.join('');
+
+    if (userFormula === correctFormula) {
+        formulaScore = Math.min(formulaScore + 10, FORMULA_MAX);
+        document.getElementById('formulaScore').textContent = `${formulaScore} / ${FORMULA_MAX}`;
+        if (progressEl) progressEl.style.width = `${Math.round((formulaScore / FORMULA_MAX) * 100)}%`;
+        
+        feedback.textContent = '✓ ' + (gamesLanguage === 'kn' ? 'ಸರಿ!' : 'Correct!');
+        feedback.style.color = '#90EE90';
+        
+        formulaCurrent++;
+        setTimeout(() => {
+            clearFormula();
+            generateFormulaQuestion();
+        }, 1200);
+    } else {
+        formulaMistakes.push({
+            name: currentFormulaQuestion.name,
+            correct: currentFormulaQuestion.formula.join(' '),
+            userAnswer: selectedParts.join(' ')
+        });
+        
+        feedback.textContent = '✗ ' + (gamesLanguage === 'kn' ? 'ತಪ್ಪು. ಸರಿಯಾದುದು: ' : 'Wrong. Correct: ') + currentFormulaQuestion.formula.join(' ');
+        feedback.style.color = '#FFB6C1';
+        
+        formulaCurrent++;
+        setTimeout(() => {
+            clearFormula();
+            generateFormulaQuestion();
+        }, 2000);
+    }
+}
+
+function resetFormula() {
+    formulaScore = 0;
+    formulaCurrent = 0;
+    formulaMistakes = [];
+    selectedParts = [];
+    const scoreEl = document.getElementById('formulaScore');
+    const feedback = document.getElementById('formulaFeedback');
+    const progressEl = document.getElementById('formulaProgress');
+    const resetBtn = document.getElementById('formulaReset');
+    const counterEl = document.getElementById('formulaCounter');
+    const summaryContainer = document.getElementById('formulaSummary');
+    if (scoreEl) scoreEl.textContent = `${formulaScore} / ${FORMULA_MAX}`;
+    if (progressEl) progressEl.style.width = '0%';
+    if (resetBtn) resetBtn.style.display = 'none';
+    if (feedback) feedback.textContent = '';
+    if (counterEl) counterEl.textContent = `${t('question')} 1 / ${FORMULA_TOTAL}`;
+    if (summaryContainer) {
+        summaryContainer.style.display = 'none';
+        summaryContainer.innerHTML = '';
+    }
+    generateFormulaQuestion();
+}
+
+function renderFormulaSummary() {
+    const container = document.getElementById('formulaSummary');
+    if (!container || formulaMistakes.length === 0) {
+        if (container) container.innerHTML = `<p style="color: #90EE90; font-size: 1.1rem;">${t('perfectScore')}</p>`;
+        return;
+    }
+
+    let html = `<div class="summary-title">${t('whatToReview')}</div>`;
+    
+    formulaMistakes.forEach(m => {
+        html += '<div class="summary-group" style="border-color: #FFB347;">';
+        html += `<div class="summary-group-title">${m.name}</div>`;
+        html += '<div class="summary-visual">';
+        html += '<div class="carry-steps">';
+        html += `<div class="step">${gamesLanguage === 'kn' ? 'ಸರಿಯಾದ ಸೂತ್ರ' : 'Correct formula'}: <strong>${m.correct}</strong></div>`;
+        html += `<div class="step" style="color: #FFB6C1;">${gamesLanguage === 'kn' ? 'ನಿಮ್ಮ ಉತ್ತರ' : 'Your answer'}: ${m.userAnswer}</div>`;
+        html += '</div></div></div>';
+    });
+
+    container.innerHTML = html;
+}
+
 // Initialize games
 document.addEventListener('DOMContentLoaded', () => {
     syncLanguage(); // Initialize language from localStorage
@@ -575,6 +884,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (numberMatchResetBtn) numberMatchResetBtn.onclick = resetNumberMatch;
     const patternResetBtn = document.getElementById('patternReset');
     if (patternResetBtn) patternResetBtn.onclick = resetPattern;
+    const formulaResetBtn = document.getElementById('formulaReset');
+    if (formulaResetBtn) formulaResetBtn.onclick = resetFormula;
     // Initialize score displays with max values
     const numberMatchScoreEl = document.getElementById('numberMatchScore');
     if (numberMatchScoreEl) numberMatchScoreEl.textContent = `${numberMatchScore} / ${NUMBER_MATCH_MAX}`;
