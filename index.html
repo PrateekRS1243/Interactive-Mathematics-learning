@@ -118,7 +118,7 @@
 
         <!-- Theorem Prover Modal -->
         <div id="theoremProverModal" class="game-modal">
-            <div class="game-modal-content modal-cyan">
+            <div class="game-modal-content modal-green">
                 <button class="close-modal" onclick="closeGame('theoremProver')">&times;</button>
                 <div class="game-header">
                     <h3 class="game-title" data-en="📐 Theorem Prover" data-kn="📐 ಪ್ರಮೇಯ ಸಾಧಕ">📐 Theorem Prover</h3>
@@ -141,7 +141,14 @@
                 <div class="game-content">
                     <div class="theorem-diagram" id="theoremDiagram"></div>
                     <div class="game-question" id="theoremProverQuestion"></div>
+                    <!-- Theorem Selection Stage (now after context) -->
+                    <div id="theoremSelectionStage" style="display:none; margin:1rem 0;">
+                        <div class="game-question" id="theoremSelectPrompt" style="margin-bottom:0.75rem; font-weight:800;"></div>
+                        <div class="theorem-select-group" id="theoremTheoremOptions"></div>
+                        <div class="game-feedback" id="theoremSelectFeedback"></div>
+                    </div>
                     <div class="game-options" id="theoremProverOptions"></div>
+                    <div id="theoremProofSteps" style="display:none; margin-top:1rem; background:rgba(255,255,255,0.15); padding:1rem; border-radius:0.75rem; font-size:0.9rem; line-height:1.4;"></div>
                     <div class="game-feedback" id="theoremProverFeedback"></div>
                     <div id="theoremProverResults" class="summary-container" style="display:none;">
                         <div id="theoremProverResultText" style="font-size: 1.5rem; font-weight: 900; margin-bottom: 1.5rem; text-align: center;"></div>
@@ -279,7 +286,7 @@
 
                     <!-- Theorem Prover Card -->
                     <div class="game-card-preview" onclick="openGame('theoremProver')">
-                        <div class="game-card-inner" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="game-card-inner" style="background: linear-gradient(135deg, #34d399 0%, #059669 100%);">
                             <div class="game-icon">📐</div>
                             <h3 class="game-title" data-en="Theorem Prover" data-kn="ಪ್ರಮೇಯ ಸಾಧಕ">Theorem Prover</h3>
                             <p class="game-description" data-en="Apply Pythagoras, triangle & circle theorems" data-kn="ಪೈಥಾಗರಸ್, ತ್ರಿಕೋನ ಮತ್ತು ವೃತ್ತ ಪ್ರಮೇಯಗಳನ್ನು ಅನ್ವಯಿಸಿ">Apply Pythagoras, triangle & circle theorems</p>
