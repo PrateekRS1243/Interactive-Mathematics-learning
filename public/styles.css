@@ -1316,15 +1316,15 @@ canvas {
 }
 
 .instructions-toggle {
-    position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
+    position: static; /* place in flow under title */
+    margin: 0.5rem 0 0 0; /* space below title */
+    align-self: flex-start; /* align left under title */
     background: rgba(255, 255, 255, 0.35);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.5);
     color: rgba(30, 41, 59, 0.9);
-    padding: 0.6rem 1rem;
+    padding: 0.5rem 0.75rem; /* make button shorter horizontally */
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 700;
@@ -1332,8 +1332,9 @@ canvas {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    z-index: 10;
+    z-index: 1;
     white-space: nowrap;
+    width: fit-content; /* prevent overly wide pill */
 }
 
 .instructions-toggle:hover {
@@ -1445,19 +1446,22 @@ canvas {
 }
 
 .game-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid; /* prevent overlap and allow two-row layout */
+    grid-template-columns: 1fr auto; /* title/instructions on left, score on right */
+    grid-template-rows: auto auto; /* title row then instructions button row */
     align-items: center;
     margin-bottom: 1.5rem;
-    padding-right: 4rem;
-    margin-left: 11rem;
+    padding: 0 5.5rem 0 1rem; /* keep room for close button on right */
+    gap: 0.5rem 1rem;
 }
 
 .game-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 900;
     color: #0f172a;
     text-shadow: 0 2px 4px rgba(255, 255, 255, 0.4);
+    grid-column: 1 / 2; /* left column */
+    grid-row: 1 / 2;     /* first row */
 }
 
 .game-score {
@@ -1472,6 +1476,17 @@ canvas {
     box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.8);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    white-space: nowrap;
+    grid-column: 2 / 3; /* right column */
+    grid-row: 1 / 2;     /* align with title row */
+}
+
+/* Place instructions button under title within header grid */
+#mathQuizModal .instructions-toggle,
+#patternModal .instructions-toggle,
+#formulaMemoryModal .instructions-toggle {
+    grid-column: 1 / 2; /* left column under title */
+    grid-row: 2 / 3;     /* second row */
 }
 
 .game-progress {
