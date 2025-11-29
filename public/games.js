@@ -172,6 +172,13 @@ function startFormulaCountdown() {
     // Show formula list to learn
     if (learnList) {
         learnList.style.display = 'block';
+        // Mark Learning visited when entering the learning phase
+        try {
+            localStorage.setItem('learningVisited', 'true');
+            if (typeof refreshGamesGate === 'function') {
+                refreshGamesGate();
+            }
+        } catch (e) {}
         let html = '';
         if (typeof formulaQuestions !== 'undefined') {
             formulaQuestions.forEach(q => {
@@ -235,6 +242,13 @@ function skipFormulaCountdown() {
     if (clearBtn) clearBtn.disabled = false;
     const learnList = document.getElementById('formulaLearnList');
     if (learnList) { learnList.style.display = 'none'; learnList.innerHTML = ''; }
+    // Ensure Learning is marked visited on skip
+    try {
+        localStorage.setItem('learningVisited', 'true');
+        if (typeof refreshGamesGate === 'function') {
+            refreshGamesGate();
+        }
+    } catch (e) {}
     // Restore UI visibility when skipping
     const promptEl = document.getElementById('formulaPrompt');
     const targetEl = document.getElementById('formulaTarget');

@@ -912,6 +912,45 @@ canvas {
     gap: 2rem;
 }
 
+/* Gate shown before Learning */
+.games-gate {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin: 18px 0 28px 0;
+}
+.gate-inner {
+    width: 100%;
+    max-width: 920px;
+    border-radius: 20px;
+    padding: 20px 22px;
+    backdrop-filter: blur(14px) saturate(130%) brightness(1.05);
+    -webkit-backdrop-filter: blur(14px) saturate(130%) brightness(1.05);
+    background: linear-gradient(180deg, rgba(255,255,255,0.42), rgba(255,255,255,0.28));
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.35);
+    text-align: center;
+}
+.gate-icon { font-size: 28px; margin-bottom: 6px; }
+.gate-title { font-weight: 700; font-size: 20px; margin: 0 0 6px 0; color: #e0f2fe; }
+.gate-text { font-size: 15px; color: #e0f2fe; opacity: 0.9; margin: 0 0 14px 0; }
+.gate-actions { display: flex; gap: 10px; justify-content: center; }
+.gate-actions .game-start-btn { min-width: 160px; }
+
+/* Hint shown after Learning */
+.games-hint {
+    display: none;
+    margin: 6px 0 16px 0;
+    padding: 10px 12px;
+    border-radius: 14px;
+    backdrop-filter: blur(12px) saturate(125%);
+    -webkit-backdrop-filter: blur(12px) saturate(125%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.12));
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 14px 38px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.35);
+    color: #e0f2fe;
+}
+
 .game-card-preview {
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);

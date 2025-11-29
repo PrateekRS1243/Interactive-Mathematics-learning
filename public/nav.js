@@ -26,6 +26,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (langToggle) {
         langToggle.addEventListener('click', toggleLanguage);
     }
+
+    // --- Gate games until Learning visited ---
+    const gamesGrid = document.getElementById('gamesGrid');
+    const gamesGate = document.getElementById('gamesGate');
+    const gamesHint = document.getElementById('gamesHint');
+    const visited = localStorage.getItem('learningVisited') === 'true';
+    if (gamesGrid && gamesGate) {
+        gamesGrid.style.display = visited ? '' : 'none';
+        gamesGate.style.display = visited ? 'none' : 'flex';
+        if (gamesHint) gamesHint.style.display = visited ? '' : 'none';
+    }
+
+    // Clicking any topic-card marks Learning as visited
+    document.querySelectorAll('.topic-card').forEach(card => {
+        card.addEventListener('click', () => {
+            localStorage.setItem('learningVisited', 'true');
+        });
+    });
+
+    // Gate actions: scroll to topics or open Formula learning preview
+    const goToLearningBtn = document.getElementById('goToLearningBtn');
+    if (goToLearningBtn) {
+        goToLearningBtn.addEventListener('click', () => {
+            const topics = document.querySelector('.topics-grid');
+            if (topics) {
+                topics.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }
+
+    const openFormulaLearningBtn = document.getElementById('openFormulaLearningBtn');
+    if (openFormulaLearningBtn) {
+        openFormulaLearningBtn.addEventListener('click', () => {
+            if (typeof window.openGame === 'function') {
+                window.openGame('formulaMemory');
+            }
+        });
+    }
 });
 
 // Instructions toggle function
@@ -64,5 +102,18 @@ function toggleInstructions(gameName) {
                 }
             }
         }
+    }
+}
+
+// Helper to refresh gate state if needed elsewhere
+function refreshGamesGate() {
+    const gamesGrid = document.getElementById('gamesGrid');
+    const gamesGate = document.getElementById('gamesGate');
+    const gamesHint = document.getElementById('gamesHint');
+    const visited = localStorage.getItem('learningVisited') === 'true';
+    if (gamesGrid && gamesGate) {
+        gamesGrid.style.display = visited ? '' : 'none';
+        gamesGate.style.display = visited ? 'none' : 'flex';
+        if (gamesHint) gamesHint.style.display = visited ? '' : 'none';
     }
 }

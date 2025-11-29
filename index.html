@@ -39,8 +39,26 @@
             <div class="games-container">
                 <h2 class="games-header" data-en="🎮 Practice with Fun Games" data-kn="🎮 ಮೋಜಿನ ಆಟಗಳೊಂದಿಗೆ ಅಭ್ಯಾಸ">🎮 Practice with Fun Games</h2>
                 <p class="games-subtitle" data-en="Choose a game to sharpen your math skills!" data-kn="ನಿಮ್ಮ ಗಣಿತ ಕೌಶಲ್ಯವನ್ನು ಹರಿತಗೊಳಿಸಲು ಆಟವನ್ನು ಆರಿಸಿ!">Choose a game to sharpen your math skills!</p>
-                
-                <div class="games-grid">
+
+                <!-- Hint shown after visiting Learning -->
+                <div id="gamesHint" class="games-hint" style="display:none;">
+                    <span data-en="✅ Great! You explored Learning. Now play the games below." data-kn="✅ ಚೆನ್ನಾಗಿದೆ! ನೀವು ಕಲಿಕೆಯನ್ನು ನೋಡಿದ್ದೀರಿ. ಈಗ ಕೆಳಗಿನ ಆಟಗಳನ್ನು ಆಡಿರಿ.">✅ Great! You explored Learning. Now play the games below.</span>
+                </div>
+
+                <!-- Gate shown before visiting Learning -->
+                <div id="gamesGate" class="games-gate" style="display:flex;">
+                    <div class="gate-inner">
+                        <div class="gate-icon">📘</div>
+                        <h3 class="gate-title" data-en="Start with Learning" data-kn="ಕಲಿಕೆಯಿಂದ ಪ್ರಾರಂಭಿಸಿ">Start with Learning</h3>
+                        <p class="gate-text" data-en="Please visit the Learning topics first. Come back here to unlock the games." data-kn="ದಯವಿಟ್ಟು ಮೊದಲು ಕಲಿಕೆಯ ವಿಷಯಗಳನ್ನು ಭೇಟಿ ಮಾಡಿ. ಆಟಗಳನ್ನು ಅನ್ಲಾಕ್ ಮಾಡಲು ಇಲ್ಲಿ ಹಿಂತಿರುಗಿ.">Please visit the Learning topics first. Come back here to unlock the games.</p>
+                        <div class="gate-actions">
+                            <button id="goToLearningBtn" class="game-start-btn" data-en="Go to Learning" data-kn="ಕಲಿಕೆಗೆ ಹೋಗಿ">Go to Learning</button>
+                            <button id="openFormulaLearningBtn" class="game-btn" data-en="Preview Formulas" data-kn="ಸೂತ್ರಗಳನ್ನು ನೋಡಿರಿ">Preview Formulas</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="gamesGrid" class="games-grid" style="display:none;">
                     <!-- Number Match Game Card -->
                     <div class="game-card-preview" onclick="openGame('numberMatch')">
                         <div class="game-card-inner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
