@@ -1291,6 +1291,87 @@ canvas {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 25px rgba(249, 115, 22, 0.4);
 }
 
+/* Cyan theme for Theorem Prover - Vibrant liquid glass */
+.modal-cyan {
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.4) 0%, rgba(0, 242, 254, 0.35) 100%);
+    border: 2px solid rgba(79, 172, 254, 0.8);
+}
+
+.modal-cyan::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(6, 182, 212, 0.2) 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.modal-cyan .game-title,
+.modal-cyan .game-question,
+.modal-cyan .game-meta {
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(14, 165, 233, 0.3);
+}
+
+.modal-cyan .game-btn {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.25) 100%);
+    color: #0c4a6e;
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Hint button styles */
+.hint-btn {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.3) 0%, rgba(255, 152, 0, 0.25) 100%);
+    color: #ffffff;
+    border: 2px solid rgba(255, 193, 7, 0.6);
+    padding: 0.75rem 1.5rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    margin-bottom: 1rem;
+}
+
+.hint-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.4) 0%, rgba(255, 152, 0, 0.35) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.3);
+}
+
+.hint-box {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 152, 0, 0.1) 100%);
+    border: 2px solid rgba(255, 193, 7, 0.5);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Theorem diagram styles */
+.theorem-diagram {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
 .close-modal {
     position: absolute;
     top: 1.25rem;

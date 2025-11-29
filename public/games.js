@@ -171,8 +171,10 @@ window.openGame = function(gameType) {
     if (gameType === 'mathQuiz') {
         initializeMathQuiz(); // Initialize with unique questions
         generateMathQuizQuestion();
-    } else if (gameType === 'pattern') {
-        runTheoryCheck('pattern', () => generatePattern());
+    } else if (gameType === 'wordProblem') {
+        generateWordProblem();
+    } else if (gameType === 'theoremProver') {
+        generateTheoremProblem();
     } else if (gameType === 'formulaMemory') {
         // Attach event listeners to existing HTML ids
         const clearBtn = document.getElementById('formulaClear');
@@ -183,7 +185,7 @@ window.openGame = function(gameType) {
         if (submitBtn) submitBtn.onclick = checkFormulaAnswer;
         if (replayBtn) replayBtn.onclick = resetFormula;
         if (skipBtn) skipBtn.onclick = skipFormulaCountdown;
-        runTheoryCheck('formula', () => startFormulaCountdown());
+        startFormulaCountdown();
     }
 }
 // ---------------- Theory Check (shared for Pattern & Formula) ----------------

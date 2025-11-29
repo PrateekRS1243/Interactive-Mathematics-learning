@@ -78,51 +78,77 @@
             </div>
         </div>
 
-        <!-- Pattern Builder Modal -->
-        <div id="patternModal" class="game-modal">
+        <!-- Word Problem Solver Modal -->
+        <div id="wordProblemModal" class="game-modal">
             <div class="game-modal-content modal-pink">
-                <button class="close-modal" onclick="closeGame('pattern')">&times;</button>
+                <button class="close-modal" onclick="closeGame('wordProblem')">&times;</button>
                 <div class="game-header">
-                    <h3 class="game-title" data-en="🧩 Pattern Builder" data-kn="🧩 ಮಾದರಿ ನಿರ್ಮಾಣ">🧩 Pattern Builder</h3>
-                    <button class="instructions-toggle" onclick="toggleInstructions('pattern')" data-en="ℹ️ How to Play" data-kn="ℹ️ ಹೇಗೆ ಆಡಬೇಕು">ℹ️ How to Play</button>
-                    <div class="game-score"><span data-en="Score:" data-kn="ಅಂಕ:">Score:</span> <span id="patternScore">0</span></div>
+                    <h3 class="game-title" data-en="📝 Word Problem Solver" data-kn="📝 ಪದ ಸಮಸ್ಯೆ ಪರಿಹಾರಕ">📝 Word Problem Solver</h3>
+                    <button class="instructions-toggle" onclick="toggleInstructions('wordProblem')" data-en="ℹ️ How to Play" data-kn="ℹ️ ಹೇಗೆ ಆಡಬೇಕು">ℹ️ How to Play</button>
+                    <div class="game-score"><span data-en="Score:" data-kn="ಅಂಕ:">Score:</span> <span id="wordProblemScore">0</span></div>
                 </div>
-                <div id="patternInstructions" class="instructions-panel" style="display:none;">
+                <div id="wordProblemInstructions" class="instructions-panel" style="display:none;">
                     <h4 class="instructions-title" data-en="📖 How to Play" data-kn="📖 ಹೇಗೆ ಆಡಬೇಕು">📖 How to Play</h4>
                     <ul class="instructions-list">
-                        <li data-en="Study the number sequence carefully" data-kn="ಸಂಖ್ಯೆಯ ಅನುಕ್ರಮವನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ಅಧ್ಯಯನ ಮಾಡಿ">Study the number sequence carefully</li>
-                        <li data-en="Find the pattern or rule in the sequence" data-kn="ಅನುಕ್ರಮದಲ್ಲಿ ಮಾದರಿ ಅಥವಾ ನಿಯಮವನ್ನು ಹುಡುಕಿ">Find the pattern or rule in the sequence</li>
-                        <li data-en="Type the missing number to complete the sequence" data-kn="ಅನುಕ್ರಮವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಕಾಣೆಯಾದ ಸಂಖ್ಯೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ">Type the missing number to complete the sequence</li>
-                        <li data-en="Complete 10 patterns to finish the game" data-kn="ಆಟವನ್ನು ಮುಗಿಸಲು 10 ಮಾದರಿಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ">Complete 10 patterns to finish the game</li>
+                        <li data-en="Read real-world math problems carefully" data-kn="ನಿಜ-ಜಗತ್ತಿನ ಗಣಿತ ಸಮಸ್ಯೆಗಳನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ಓದಿ">Read real-world math problems carefully</li>
+                        <li data-en="Identify what is being asked" data-kn="ಏನು ಕೇಳಲಾಗುತ್ತಿದೆ ಎಂಬುದನ್ನು ಗುರುತಿಸಿ">Identify what is being asked</li>
+                        <li data-en="Use hints if you need help" data-kn="ನಿಮಗೆ ಸಹಾಯ ಬೇಕಾದರೆ ಸುಳಿವುಗಳನ್ನು ಬಳಸಿ">Use hints if you need help</li>
+                        <li data-en="Choose the correct answer from 4 options" data-kn="4 ಆಯ್ಕೆಗಳಿಂದ ಸರಿಯಾದ ಉತ್ತರವನ್ನು ಆರಿಸಿ">Choose the correct answer from 4 options</li>
+                        <li data-en="Each correct answer gives you 10 points" data-kn="ಪ್ರತಿ ಸರಿಯಾದ ಉತ್ತರವು ನಿಮಗೆ 10 ಅಂಕಗಳನ್ನು ನೀಡುತ್ತದೆ">Each correct answer gives you 10 points</li>
                     </ul>
-                    <button class="back-to-game-btn" onclick="toggleInstructions('pattern')" data-en="▶️ Back to Game" data-kn="▶️ ಆಟಕ್ಕೆ ಹಿಂತಿರುಗಿ">▶️ Back to Game</button>
+                    <button class="back-to-game-btn" onclick="toggleInstructions('wordProblem')" data-en="▶️ Back to Game" data-kn="▶️ ಆಟಕ್ಕೆ ಹಿಂತಿರುಗಿ">▶️ Back to Game</button>
                 </div>
-                <div class="game-meta"><span id="patternCounter">Question 0 / 10</span></div>
-                <div class="game-progress"><div id="patternProgress" class="game-progress-bar" style="width: 0%"></div></div>
-                <!-- Theory Check (Pattern) -->
-                <div id="patternTheory" class="instructions-panel" style="display:none;">
-                    <h4 class="instructions-title" data-en="🧠 Theory Check" data-kn="🧠 ತತ್ವ ಪರಿಶೀಲನೆ">🧠 Theory Check</h4>
-                    <div class="game-question" id="patternTheoryQuestion"></div>
-                    <div class="game-options" id="patternTheoryOptions"></div>
-                    <div class="game-feedback" id="patternTheoryFeedback"></div>
-                    <button class="back-to-game-btn" id="patternTheoryContinue" style="display:none" data-en="▶️ Continue" data-kn="▶️ ಮುಂದುವರಿಸಿ">▶️ Continue</button>
-                </div>
+                <div class="game-meta"><span id="wordProblemCounter">Question 0 / 10</span></div>
+                <div class="game-progress"><div id="wordProblemProgress" class="game-progress-bar" style="width: 0%"></div></div>
                 <div class="game-content">
-                    <div class="pattern-display" id="patternDisplay">
-                        <div class="pattern-box">2</div>
-                        <div class="pattern-box">4</div>
-                        <div class="pattern-box">6</div>
-                        <div class="pattern-box">?</div>
+                    <div class="game-question" id="wordProblemQuestion"></div>
+                    <button class="hint-btn" id="wordProblemHintBtn" onclick="toggleHint()" data-en="💡 Show Hint" data-kn="💡 ಸುಳಿವು ತೋರಿಸಿ">💡 Show Hint</button>
+                    <div class="hint-box" id="wordProblemHint" style="display:none;"></div>
+                    <div class="game-options" id="wordProblemOptions"></div>
+                    <div class="game-feedback" id="wordProblemFeedback"></div>
+                    <div id="wordProblemResults" class="summary-container" style="display:none;">
+                        <div id="wordProblemResultText" style="font-size: 1.5rem; font-weight: 900; margin-bottom: 1.5rem; text-align: center;"></div>
+                        <button id="wordProblemViewSummary" class="game-start-btn" style="display:none" data-en="📊 View Summary" data-kn="📊 ಸಾರಾಂಶ ನೋಡಿ">📊 View Summary</button>
                     </div>
-                    <input type="number" class="game-input" id="patternInput" placeholder="Next number?">
-                    <button class="game-btn" id="patternCheck">Check Answer</button>
-                    <div class="game-feedback" id="patternFeedback"></div>
-                    <div id="patternResults" class="summary-container" style="display:none;">
-                        <div id="patternResultText" style="font-size: 1.5rem; font-weight: 900; margin-bottom: 1.5rem; text-align: center;"></div>
-                        <button id="patternViewSummary" class="game-start-btn" style="display:none" data-en="📊 View Summary" data-kn="📊 ಸಾರಾಂಶ ನೋಡಿ">📊 View Summary</button>
+                    <div id="wordProblemSummary" class="summary-container" style="display:none;"></div>
+                    <button id="wordProblemReset" class="game-start-btn" style="display:none">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Theorem Prover Modal -->
+        <div id="theoremProverModal" class="game-modal">
+            <div class="game-modal-content modal-cyan">
+                <button class="close-modal" onclick="closeGame('theoremProver')">&times;</button>
+                <div class="game-header">
+                    <h3 class="game-title" data-en="📐 Theorem Prover" data-kn="📐 ಪ್ರಮೇಯ ಸಾಧಕ">📐 Theorem Prover</h3>
+                    <button class="instructions-toggle" onclick="toggleInstructions('theoremProver')" data-en="ℹ️ How to Play" data-kn="ℹ️ ಹೇಗೆ ಆಡಬೇಕು">ℹ️ How to Play</button>
+                    <div class="game-score"><span data-en="Score:" data-kn="ಅಂಕ:">Score:</span> <span id="theoremProverScore">0</span></div>
+                </div>
+                <div id="theoremProverInstructions" class="instructions-panel" style="display:none;">
+                    <h4 class="instructions-title" data-en="📖 How to Play" data-kn="📖 ಹೇಗೆ ಆಡಬೇಕು">📖 How to Play</h4>
+                    <ul class="instructions-list">
+                        <li data-en="Apply Pythagoras theorem, triangle properties, and circle theorems" data-kn="ಪೈಥಾಗರಸ್ ಪ್ರಮೇಯ, ತ್ರಿಕೋನ ಗುಣಲಕ್ಷಣಗಳು ಮತ್ತು ವೃತ್ತ ಪ್ರಮೇಯಗಳನ್ನು ಅನ್ವಯಿಸಿ">Apply Pythagoras theorem, triangle properties, and circle theorems</li>
+                        <li data-en="Look at the geometric diagram provided" data-kn="ಒದಗಿಸಿದ ಜ್ಯಾಮಿತೀಯ ರೇಖಾಚಿತ್ರವನ್ನು ನೋಡಿ">Look at the geometric diagram provided</li>
+                        <li data-en="Identify which theorem applies" data-kn="ಯಾವ ಪ್ರಮೇಯ ಅನ್ವಯವಾಗುತ್ತದೆ ಎಂಬುದನ್ನು ಗುರುತಿಸಿ">Identify which theorem applies</li>
+                        <li data-en="Calculate the missing value" data-kn="ಕಾಣೆಯಾದ ಮೌಲ್ಯವನ್ನು ಲೆಕ್ಕ ಹಾಕಿ">Calculate the missing value</li>
+                        <li data-en="Each correct answer gives you 12 points" data-kn="ಪ್ರತಿ ಸರಿಯಾದ ಉತ್ತರವು ನಿಮಗೆ 12 ಅಂಕಗಳನ್ನು ನೀಡುತ್ತದೆ">Each correct answer gives you 12 points</li>
+                    </ul>
+                    <button class="back-to-game-btn" onclick="toggleInstructions('theoremProver')" data-en="▶️ Back to Game" data-kn="▶️ ಆಟಕ್ಕೆ ಹಿಂತಿರುಗಿ">▶️ Back to Game</button>
+                </div>
+                <div class="game-meta"><span id="theoremProverCounter">Question 0 / 8</span></div>
+                <div class="game-progress"><div id="theoremProverProgress" class="game-progress-bar" style="width: 0%"></div></div>
+                <div class="game-content">
+                    <div class="theorem-diagram" id="theoremDiagram"></div>
+                    <div class="game-question" id="theoremProverQuestion"></div>
+                    <div class="game-options" id="theoremProverOptions"></div>
+                    <div class="game-feedback" id="theoremProverFeedback"></div>
+                    <div id="theoremProverResults" class="summary-container" style="display:none;">
+                        <div id="theoremProverResultText" style="font-size: 1.5rem; font-weight: 900; margin-bottom: 1.5rem; text-align: center;"></div>
+                        <button id="theoremProverViewSummary" class="game-start-btn" style="display:none" data-en="📊 View Summary" data-kn="📊 ಸಾರಾಂಶ ನೋಡಿ">📊 View Summary</button>
                     </div>
-                    <div id="patternSummary" class="summary-container" style="display:none;"></div>
-                    <button id="patternReset" class="game-start-btn" style="display:none">Play Again</button>
+                    <div id="theoremProverSummary" class="summary-container" style="display:none;"></div>
+                    <button id="theoremProverReset" class="game-start-btn" style="display:none">Play Again</button>
                 </div>
             </div>
         </div>
@@ -148,14 +174,6 @@
                 </div>
                 <div class="game-meta"><span id="formulaCounter">Question 0 / 10</span></div>
                 <div class="game-progress"><div id="formulaProgress" class="game-progress-bar" style="width: 0%"></div></div>
-                <!-- Theory Check (Formula) -->
-                <div id="formulaTheory" class="instructions-panel" style="display:none;">
-                    <h4 class="instructions-title" data-en="🧠 Theory Check" data-kn="🧠 ತತ್ವ ಪರಿಶೀಲನೆ">🧠 Theory Check</h4>
-                    <div class="game-question" id="formulaTheoryQuestion"></div>
-                    <div class="game-options" id="formulaTheoryOptions"></div>
-                    <div class="game-feedback" id="formulaTheoryFeedback"></div>
-                    <button class="back-to-game-btn" id="formulaTheoryContinue" style="display:none" data-en="▶️ Continue" data-kn="▶️ ಮುಂದುವರಿಸಿ">▶️ Continue</button>
-                </div>
                 <div class="game-content">
                     <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
                         <div class="game-timer" id="formulaCountdown" style="display:none">Time: 30s</div>
@@ -249,12 +267,22 @@
                         </div>
                     </div>
 
-                    <!-- Pattern Builder Card -->
-                    <div class="game-card-preview" onclick="openGame('pattern')">
+                    <!-- Word Problem Solver Card -->
+                    <div class="game-card-preview" onclick="openGame('wordProblem')">
                         <div class="game-card-inner" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                            <div class="game-icon">🧩</div>
-                            <h3 class="game-title" data-en="Pattern Builder" data-kn="ಮಾದರಿ ನಿರ್ಮಾಣ">Pattern Builder</h3>
-                            <p class="game-description" data-en="Complete number sequences and patterns" data-kn="ಸಂಖ್ಯೆಯ ಅನುಕ್ರಮಗಳು ಮತ್ತು ಮಾದರಿಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ">Complete number sequences and patterns</p>
+                            <div class="game-icon">📝</div>
+                            <h3 class="game-title" data-en="Word Problem Solver" data-kn="ಪದ ಸಮಸ್ಯೆ ಪರಿಹಾರಕ">Word Problem Solver</h3>
+                            <p class="game-description" data-en="Solve real-world math problems with step-by-step hints" data-kn="ಹಂತ-ಹಂತ ಸುಳಿವುಗಳೊಂದಿಗೆ ನಿಜ-ಜಗತ್ತಿನ ಗಣಿತ ಸಮಸ್ಯೆಗಳನ್ನು ಪರಿಹರಿಸಿ">Solve real-world math problems with step-by-step hints</p>
+                            <button class="play-btn" data-en="Play Now →" data-kn="ಈಗ ಆಡಿ →">Play Now →</button>
+                        </div>
+                    </div>
+
+                    <!-- Theorem Prover Card -->
+                    <div class="game-card-preview" onclick="openGame('theoremProver')">
+                        <div class="game-card-inner" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <div class="game-icon">📐</div>
+                            <h3 class="game-title" data-en="Theorem Prover" data-kn="ಪ್ರಮೇಯ ಸಾಧಕ">Theorem Prover</h3>
+                            <p class="game-description" data-en="Apply Pythagoras, triangle & circle theorems" data-kn="ಪೈಥಾಗರಸ್, ತ್ರಿಕೋನ ಮತ್ತು ವೃತ್ತ ಪ್ರಮೇಯಗಳನ್ನು ಅನ್ವಯಿಸಿ">Apply Pythagoras, triangle & circle theorems</p>
                             <button class="play-btn" data-en="Play Now →" data-kn="ಈಗ ಆಡಿ →">Play Now →</button>
                         </div>
                     </div>
@@ -275,6 +303,7 @@
 
     <script src="/nav.js" defer></script>
     <script src="/questionBank.js" defer></script>
+        <script src="/newGames.js" defer></script>
     <script src="/games.js" defer></script>
 </body>
 </html>
